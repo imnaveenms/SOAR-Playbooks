@@ -35,18 +35,91 @@ This repository contains a collection of **Security Orchestration, Automation, a
  ├── README.md
 ```
 
-## Getting Started
-### Clone the Repository
-```bash
-git clone https://github.com/yourusername/SOAR-Playbooks.git
-cd SOAR-Playbooks
+## Playbooks
+### **Incident Response Playbook (JSON)**
+```json
+{
+  "name": "Incident Response Playbook",
+  "description": "Automates the response to security incidents",
+  "steps": [
+    { "step": 1, "action": "Analyze alert logs", "tool": "SIEM" },
+    { "step": 2, "action": "Extract IOCs", "tool": "Threat Intelligence Platform" },
+    { "step": 3, "action": "Block malicious IPs", "tool": "Firewall" },
+    { "step": 4, "action": "Notify security team", "tool": "Email/SOAR Notification" }
+  ]
+}
 ```
 
-### How to Use
-1. **Review the Playbooks:** Choose a playbook based on your security use case.
-2. **Customize as Needed:** Modify the playbooks according to your organization's needs.
-3. **Deploy in SOAR Platform:** Upload and test the playbook in your SOAR environment.
-4. **Automate Actions:** Ensure seamless integration with security tools.
+### **Phishing Investigation Playbook (YAML)**
+```yaml
+name: Phishing Investigation Playbook
+description: Automates the analysis of suspicious emails
+steps:
+  - step: Extract email headers
+    tool: Email Security Gateway
+  - step: Analyze links and attachments
+    tool: Sandbox
+  - step: Check sender reputation
+    tool: Threat Intelligence Platform
+  - step: Quarantine email if malicious
+    tool: Email Security Gateway
+```
+
+### **Malware Analysis Playbook (JSON)**
+```json
+{
+  "name": "Malware Analysis Playbook",
+  "description": "Investigates and mitigates malware threats",
+  "steps": [
+    { "step": 1, "action": "Extract file hash", "tool": "Endpoint Security" },
+    { "step": 2, "action": "Submit to sandbox", "tool": "Threat Analysis Platform" },
+    { "step": 3, "action": "Block malicious hash", "tool": "Firewall" },
+    { "step": 4, "action": "Notify security team", "tool": "Email/SOAR Notification" }
+  ]
+}
+```
+
+### **Ransomware Response Playbook (YAML)**
+```yaml
+name: Ransomware Response Playbook
+description: Steps to contain and mitigate ransomware threats
+steps:
+  - step: Isolate affected system
+    tool: Endpoint Security
+  - step: Identify ransomware variant
+    tool: Threat Intelligence Platform
+  - step: Restore from backups
+    tool: Backup System
+  - step: Notify affected teams
+    tool: Incident Response Team
+```
+
+## Scripts
+### **Threat Intelligence Lookup Script (Python)**
+```python
+import requests
+
+def check_ioc(ioc):
+    url = f"https://threatintel.com/api/check?ioc={ioc}"
+    response = requests.get(url)
+    return response.json()
+
+if __name__ == "__main__":
+    ioc = input("Enter IOC to check: ")
+    result = check_ioc(ioc)
+    print(result)
+```
+
+### **Auto Isolation Script (Bash)**
+```bash
+#!/bin/bash
+
+echo "Enter IP address to isolate: "
+read ip
+
+iptables -A INPUT -s $ip -j DROP
+echo "IP $ip has been isolated."
+```
 
 ## Contributions
 We welcome contributions! Feel free to submit playbooks, scripts, and integration guides. 
